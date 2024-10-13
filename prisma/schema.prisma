@@ -14,20 +14,20 @@ datasource db {
 }
 
 model User {
-  id      String   @id @default(uuid())
-  name    String
-  email   String   @unique
-  ChekIns ChekIn[]
-
-  @@map("users")
-}
-
-model ChekIn {
   id            String   @id @default(uuid())
   name          String
   email         String   @unique
   password_hash String
   created_at    DateTime @default(now())
+  ChekIns       ChekIn[]
+
+  @@map("users")
+}
+
+model ChekIn {
+  id           String    @id @default(uuid())
+  created_at   DateTime  @default(now())
+  validated_at DateTime?
 
   user    User   @relation(fields: [user_id], references: [id])
   user_id String
